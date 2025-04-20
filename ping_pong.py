@@ -51,6 +51,13 @@ racket1 = Player('raketka.png', 480,200,60,80,4)
 racket2 = Player('raketka2.png', 80,200,60,80,4)
 ball = GameSprite('ball.png', 200,200,40,40,4)
 
+font.init()
+font = font.Font(None,35)
+lose1 = font.render('PLAYER 1 LOSE!', True, (180,0,0))
+lose2 = font.render('PLAYER 2 LOSE!', True,(180,0,0))
+
+
+
 speed_x =3
 speed_y = 3
 
@@ -66,12 +73,24 @@ while game:
         ball.rect.x += speed_x
         ball.rect.y += speed_y
 
-    
+
+    if sprite.collide_rect(racket1,ball) or sprite.collide_rect(racket2,ball):
+        speed_x*= -1
+
+    if ball.rect.x < 0:
+        finish = True
+        window.blit(lose1, (200,200))
+        game_over = True
+
+    if ball.rect.x >win_width:
+        finish = True
+        window.blit(lose2, (200,200))
+        game_over = True
 
 
-        racket1.reset()
-        racket2.reset()
-        ball.reset()
+    racket1.reset()
+    racket2.reset()
+    ball.reset()
 
 
     display.update()
