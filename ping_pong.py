@@ -48,10 +48,11 @@ FPS = 60
 
 
 racket1 = Player('raketka.png', 480,200,60,80,4)
-racket2 = Player('raketka2.png', 480,200,60,80,4)
-ball = GameSprite('ball.png', 200,200,4,50,50)
+racket2 = Player('raketka2.png', 80,200,60,80,4)
+ball = GameSprite('ball.png', 200,200,40,40,4)
 
-
+speed_x =3
+speed_y = 3
 
 while game:
     for e in event.get():
@@ -62,9 +63,16 @@ while game:
         window.blit(background,(0,0))
         racket1.update_l()
         racket2.update_r()
+        ball.rect.x += speed_x
+        ball.rect.y += speed_y
+
+    
+
 
         racket1.reset()
         racket2.reset()
+        ball.reset()
+
 
     display.update()
     clock.tick(FPS)
